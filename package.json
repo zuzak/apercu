@@ -9,6 +9,11 @@
         "async": "0.2.9",
         "underscore": "*"
     },
+    "devDependencies": {
+        "mocha": "1.12.1",
+        "chai": "1.x.x",
+        "should": "1.2.2"
+    },
     "author": {
         "name": "Douglas Gardner",
         "email": "douglas@chippy.ch",
@@ -16,9 +21,12 @@
     },
     "config": {
         "github": {
-            "id": "xxxxxxxxxxxxxxxxxxxx",
-            "secret":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            "id": "",
+            "secret":""
         },
         "port": 2345
+    },
+    "scripts": {
+        "test": "node_modules/.bin/mocha -w"
     }
 }
