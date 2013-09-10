@@ -1,0 +1,25 @@
+{
+    "name": "spacenow",
+    "description": "Space information disseminator",
+    "version": "0.0.1",
+    "private": "true",
+    "dependencies": {
+        "express": "3.2.4",
+        "jade": "0.30.0",
+        "request": "*",
+        "async": "0.2.9",
+        "underscore": "*"
+    },
+    "author": {
+        "name": "Douglas Gardner",
+        "email": "douglas@chippy.ch",
+        "url": "http://chippy.ch"
+    },
+    "config": {
+        "github": {
+            "id": "xxxxxxxxxxxxxxxxxxxx",
+            "secret":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        "port": 2345
+    }
+}

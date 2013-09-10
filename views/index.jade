@@ -1,0 +1,143 @@
+!!!5
+head
+  link(href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", rel="stylesheet")
+  script(src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
+  script(src="https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js")
+  title Status
+  style
+    table {
+      width: 100%;
+    }
+    td {
+      text-overflow:ellipsis;
+    }
+    .loading {
+      background-image:url("http://i.imgur.com/LqqHbUq.gif");
+      background-position:center;
+      background-repeat:no-repeat;
+      padding-top:2em;
+      text-align:center;
+    }
+    .na {
+      text-align:center;
+      font-style:italic;
+      color:#ccc;
+    }
+    input {
+      margin:2em auto;
+      width:20% !important;
+      display:block;
+      border:1px
+    }
+  script
+    var repos = ["gitlabhq/gitlabhq",
+                   "visionmedia/jade",
+                   "reality/dbot",
+                   "SamStudio8/Hootsim",
+                   "danharibo/Magnetite",
+                   "zuzak/r9k",
+                   "dendodge/dendodge",
+                   "reality/jsbot",
+                   "borntyping/miranda",
+                   "linkeddata/tabulator",
+                   "apenwarr/sshuttle"
+                   ];
+    $(document).ready(function(){
+      $(".loading").text("0/"+ repos.length);
+      $.each(repos, function(index, repo){
+        parse(repo,index);
+      });
+
+      $("input").keypress(function(e){
+        if(e.keyCode == 13){
+          parse($("input").val());
+          $("input").val("");
+          }
+      });
+    });
+
+
+      function parse(repo,index){
+        console.log(repo);
+        if(!index){index=-1};
+        $.getJSON("api/"+repo+".json", function(data){
+          var tblLength = $("table > tbody > tr").length;
+          $(".loading").text(tblLength + "/" + repos.length);
+          if(tblLength == (repos.length-1)){
+            $(".loading").slideUp();
+          }
+          if(!data.repo){return;}
+          var str = "";
+          str += '<tr>';
+          str += '<td><a href="' + data.repo.owner.url + '">' + data.repo.owner.login + "</a></td>";
+          str += '<td><a href="' + data.repo.url + '">' + data.repo.name + '</a></td>';
+          // str += '<td>' + data.repo.description + '</td>';
+          str += '<td>' + data.repo.size + '</td>';
+          str += '<td>' + data.repo.forks + '</td>';
+          str += '<td>' + data.repo.watchers + '</td>';
+
+          if(data.npm){
+            if(!data.npm.dependencies){
+              data.npm.dependencies = 0;
+            }
+            str += "<td>" + data.npm.dependencies + " deps";
+            if(data.npm.devDependencies){
+              str += " (+" + data.npm.devDependencies + " dev)";
+            }
+            str += "</td>";
+          } else {
+            if(data.repo.lang == "JavaScript"){
+              str += '<td class="na">No package.json</td>';
+            } else {
+              str += '<td class="na">(' + data.repo.lang + ")</td>";
+            }
+          }
+          if(data.version){
+            str += "<td>" + data.version + "</td>";
+          } else {
+            str += "<td>" + data.commit.hash.substring(0,8) + "</td>";
+          }
+          str += "<td>" + moment(data.commit.date).fromNow() + "</td>";
+
+          str += '<td>';
+            if(data.tests.travis.pending){
+              str += '<span class="label label-info">Build pending</span>';
+            } else {
+            switch(data.tests.travis.result){
+              case -1:
+                // error
+                str += '<span class="label">Build error</span>';
+                break;
+              case 0:
+                // fail
+                console.log("foo");
+                str += '<span class="label label-danger">Build failed</span>';
+                break;
+              case 1:
+                str += '<span class="label label-success">Build good</span>';
+                break; 
+            }
+            }
+          str += '</td>';
+
+          str += '</tr>';
+          $("#status").find('tbody').append(str);
+        });
+      }
+body
+  h1 Project Tracker
+  table.table.table-striped#status.table-bordered
+    thead
+      tr
+        th User
+        th Repo
+        th Size
+        th Forks
+        th Watchers
+        th NPM
+        th Version
+        th Commit date
+        th Travis
+    tbody
+  div.loading
+  input(type="text",placeholder="torvalds/git").form-control
