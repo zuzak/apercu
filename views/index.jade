@@ -87,7 +87,7 @@ head
             if(!data.npm.dependencies){
               data.npm.dependencies = 0;
             }
-            str += "<td>" + data.npm.dependencies + " deps";
+            str += "<td>" + data.npm.dependencies + " dependencies";
             if(data.npm.devDependencies){
               str += " (+" + data.npm.devDependencies + " dev)";
             }
@@ -111,13 +111,13 @@ head
           str += "<td>" + moment(data.commit.date).fromNow() + "</td>";
 
           str += '<td>';
-            if(data.tests.travis.pending){
+          if(data.tests.travis.pending){
               str += '<span class="label label-info">Build pending</span>';
             } else {
             switch(data.tests.travis.result){
               case -1:
                 // error
-                str += '<span class="label">Build error</span>';
+                str += '<span class="label label-default">Build upset</span>';
                 break;
               case 0:
                 // fail
@@ -128,7 +128,7 @@ head
                 str += '<span class="label label-success">Build good</span>';
                 break;
             }
-            }
+          }
           str += '</td>';
 
           str += '</tr>';

@@ -28,9 +28,10 @@ app.get("/api/:user/:repo.json", function(req, res){
                } else {
                    var check = 0;
                    if(travis){
-                        if(travis[check].state == "created"){
+                        if((travis[check].state == "created") || (travis[check].state == "started")){
+
                             result.tests.travis.pending = true;
-                            check = 1;
+                            // check = 1;
                         } else {
                             result.tests.travis.pending = false;
                         }
