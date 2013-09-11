@@ -2,11 +2,11 @@ var config = require('../package.json').config;
 var request = require('request');
 var should = require('should');
 
-var url = "http://localhost:" + config.port + "/api/";
+var url = "http://localhost:" + config.port + "/api";
 
 describe('The Github API section of the API', function(){
     it('should respond correctly to a valid repository', function(done){
-        request.get(url + "apercu-dummy/passing.json",function(e,r,b){
+        request.get(url + "/apercu-dummy/passing.json",function(e,r,b){
             var data = JSON.parse(b);
             data.repo.should.have.property("name","passing");
             data.repo.should.have.property("owner");
@@ -20,7 +20,7 @@ describe('The Github API section of the API', function(){
         });
     });
     it('should report forks, hashes, and watchers correctly', function(done){
-        request.get(url + "github/gitignore.json", function(e,r,b){
+        request.get(url + "/github/gitignore.json", function(e,r,b){
             var data = JSON.parse(b);
 
             data.commit.hash.should.have.length(40);
