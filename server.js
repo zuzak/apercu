@@ -51,7 +51,12 @@ app.get("/api/:user/:repo.json", function(req, res){
             });
         },
         function(callback){
-            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + "/commits?client_id=" + config.github.id + "&client_secret=" + config.github.secret, function(github){
+            var append = "";
+            if(config.github.secret && config.github.id){
+                append = "?client_id=" + config.github.id;
+                append += "&client_secret=" + config.github.secret;
+            }
+            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + "/commits" + append, function(github){
                 if(!github){callback();return;}
                 github = github[0];
                 console.log(github.sha);
@@ -66,7 +71,12 @@ app.get("/api/:user/:repo.json", function(req, res){
             });
         },
         function(callback){
-            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + "?client_id=" + config.github.id + "&client_secret=" + config.github.secret, function(github){
+            var append = "";
+            if(config.github.secret && config.github.id){
+                append = "?client_id=" + config.github.id;
+                append += "&client_secret=" + config.github.secret;
+            }
+            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + append, function(github){
                 if(!github){callback();return;}
                 var result = {
                     repo: {
