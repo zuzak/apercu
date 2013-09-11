@@ -1,8 +1,8 @@
-var config = require('../package.json').config;
+var config = require('../config');
 var request = require('request');
 var should = require('should');
 
-var url = "http://localhost:" + config.port + "/api";
+var url = "http://" + config.get("ip") + ":" + config.get("port") + "/api";
 
 describe('The Github API section of the API', function(){
     it('should respond correctly to a valid repository', function(done){

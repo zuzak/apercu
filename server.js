@@ -2,7 +2,7 @@ var express   = require("express"),
     request   = require("request"),
     app = express(),
     async     = require("async"),
-    config    = require("./package.json").config,
+    config    = require("./config.js");
     _         = require("underscore");
 
 app.set("views", __dirname + "/views");
@@ -52,9 +52,9 @@ app.get("/api/:user/:repo.json", function(req, res){
         },
         function(callback){
             var append = "";
-            if(config.github.secret && config.github.id){
-                append = "?client_id=" + config.github.id;
-                append += "&client_secret=" + config.github.secret;
+            if(config.get("githubsecret") && config.get("githubid")){
+                append = "?client_id=" + config.get("githubid");
+                append += "&client_secret=" + config.get("githubsecret");
             }
             fetchAPI("https://api.github.com/repos/" + user + "/" + repo + "/commits" + append, function(github){
                 if(!github){callback();return;}
@@ -72,9 +72,9 @@ app.get("/api/:user/:repo.json", function(req, res){
         },
         function(callback){
             var append = "";
-            if(config.github.secret && config.github.id){
-                append = "?client_id=" + config.github.id;
-                append += "&client_secret=" + config.github.secret;
+            if(config.get("githubsecret") && config.get("githubid")){
+                append = "?client_id=" + config.get("githubid");
+                append += "&client_secret=" + config.get("githubsecret");
             }
             fetchAPI("https://api.github.com/repos/" + user + "/" + repo + append, function(github){
                 if(!github){callback();return;}
@@ -156,6 +156,6 @@ function fetchAPI(url, callback){
     });
 }
 
-app.listen(config.port);
-console.log("Listening on " + config.port);
+app.listen(config.get('port'));
+console.log("Listening on " + config.get('port'));
 

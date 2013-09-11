@@ -1,8 +1,8 @@
-var config = require('../package.json').config;
+var config = require('../config');
 var request = require('request');
 var should = require('should');
 
-var url = "http://localhost:" + config.port;
+var url = "http://" + config.get("ip") + ":" + config.get('port');
 
 describe('The webserver', function(){
     it('should serve the index page', function(done){
