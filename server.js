@@ -25,7 +25,6 @@ app.get("/api/:user/:repo.json", function(req, res){
            fetchAPI("https://api.travis-ci.org/repos/" + user + "/" + repo + "/builds.json", function(travis){
                var result = {tests:{travis:{}}};
                if(travis.length === 0){
-                   console.log(travis);
                    result.tests.travis.result = null;
                } else {
                    var check = 0;
@@ -45,7 +44,6 @@ app.get("/api/:user/:repo.json", function(req, res){
                             result.tests.travis.result = -1; // error
                         }
                    } else {
-                       console.log("bar");
                         result.tests.travis.result = null;
                    }
                }
@@ -61,7 +59,6 @@ app.get("/api/:user/:repo.json", function(req, res){
             fetchAPI("https://api.github.com/repos/" + user + "/" + repo + "/commits" + append, function(github){
                 if(!github){callback();return;}
                 github = github[0];
-                console.log(github.sha);
                 var result = {
                     commit:{
                         hash: github.sha,
@@ -148,7 +145,6 @@ app.get("/api/:user/:repo.json", function(req, res){
 function fetchAPI(url, callback){
     var res;
     request.get(url, function(e, r, b){
-            console.log(url + " returned " + r.statusCode + "!");
         if(r.statusCode == 200){
             var result = JSON.parse(b);
             callback(result);
