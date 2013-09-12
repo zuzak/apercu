@@ -11,6 +11,7 @@ describe('The project list', function(){
     });
     it("should be connected to successfully", function(done){
         this.browser.success.should.be.ok;
+        done();
     });
     it("should display the correct repositories", function(done){
         this.browser.html(".apercu-dummy-passing").should.be.ok;
