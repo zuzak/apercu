@@ -65,7 +65,10 @@ head
           if(tblLength == (repos.length-1)){
             $(".loading").slideUp();
           }
-          if(!data.repo){console.log("No repo data!");return;}
+          if(!data.repo){
+            parse(repo);
+            return;
+          }
           var str = "";
           str += '<tr class="' + data.repo.owner.login + '-' + data.repo.name + '">';
           str += '<td><a href="' + data.repo.owner.url + '">' + data.repo.owner.login + "</a></td>";
