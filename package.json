@@ -12,7 +12,8 @@
     },
     "devDependencies": {
         "mocha": "1.12.1",
-        "should": "1.2.2"
+        "should": "1.2.2",
+        "zombie": "1.4.x"
     },
     "author": {
         "name": "Douglas Gardner",

@@ -49,6 +49,10 @@ head
           $("input").val("");
           }
       });
+      $("button").click(function(){
+        parse($("input").val());
+        $("input").val("");
+      });
     });
 
 
@@ -139,4 +143,6 @@ body
         th Travis
     tbody
   div.loading
-  input(type="text",placeholder="torvalds/git").form-control
+  div.form
+    input(type="text",placeholder="torvalds/git").form-control
+    button(type="submit").form-control
