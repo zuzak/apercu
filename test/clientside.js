@@ -9,6 +9,9 @@ describe('The project list', function(){
         this.browser = new Browser({silent:true});
         this.browser.visit(url).then(done,done);
     });
+    it("should be connected to successfully", function(done){
+        this.browser.success.should.be.ok;
+    });
     it("should display the correct repositories", function(done){
         this.browser.html(".apercu-dummy-passing").should.be.ok;
         this.browser.html(".apercu-dummy-failing").should.be.ok;

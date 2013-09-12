@@ -13,4 +13,4 @@ env:
   matrix:
   - NODE_ENV=test
   global:
-    secure: IiyOVQ896C6wThU12pXsKzGS9wyP2m+XoO7qL+oaHrlQlAalxGWdkEsrVEIEhDyCTAAly668+LkruVFOhFSfmYBSLE1+4g06A7RsGU9AoEDfmGFOEsb+5k75ZNe97uz9/C+p1xH7qjXLoK378+suKXusxGiq13wzrbFcPwcrq40=
+    secure: FSkNQlb7+Vn/FLaevHjd1CuCqweJYXkws95RT88g6qmru3k/5tc8aV8JPgaWapLk0Erk1AtFDd0II6R0M9yGz8JcQ1NJy46inuJdmb469MzGraK2VT95SETBNNLqWUc/ugDJpTrCnJ0sHAlmdhk9wHxjk46rRg0gniwoiruQipk=
