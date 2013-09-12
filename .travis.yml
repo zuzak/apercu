@@ -9,3 +9,5 @@ node_js:
 notifications:
     irc:
         - "irc.freenode.net#oaosidl"
+env:
+    - "NODE_ENV=test"

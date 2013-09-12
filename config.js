@@ -22,12 +22,38 @@ var conf = convict({
         doc: "The client ID half of your Github API key.",
         default:"ac164af2be0ddae99bce",
         env: "GH_CLIENT"
+    },
+    repos: {
+        doc: "The default repositories to feature in the project list",
+        default:[
+                    "visionmedia/jade",
+                    "apernwarr/sshuttle",
+                    "gitlabhq/gitlabhq",
+                    "zuzak/apercu"
+                ],
+        env: "REPOS",
+        format: Array
+    },
+    environ: {
+        doc: "The application environment",
+        format: ["dev", "test"],
+        default: "dev",
+        env: "NODE_ENV"
     }
 });
+
 try {
     conf.loadFile("./config.json");
 } catch(e){
     console.log("No config.json");
 }
+if(conf.get("environ") == "test"){
+    try {
+        conf.loadFile("./test/config.json");
+    } catch(e) {
+        console.log("No test-specific config.json");
+    }
+}
+
 conf.validate();
 module.exports = conf;

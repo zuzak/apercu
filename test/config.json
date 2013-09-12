@@ -1,0 +1,8 @@
+{
+    "repos": [
+        "apercu-dummy/passing",
+        "apercu-dummy/erroring",
+        "apercu-dummy/failing",
+        "apercu-dummy/nobuild"
+    ]
+}
