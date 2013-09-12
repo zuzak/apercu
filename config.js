@@ -49,6 +49,7 @@ try {
 }
 if(conf.get("environ") == "test"){
     try {
+        console.log("*** TESTING ***");
         conf.loadFile("./test/config.json");
     } catch(e) {
         console.log("No test-specific config.json");
