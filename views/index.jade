@@ -4,7 +4,7 @@ head
   script(src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
   script(src="https://rawgithub.com/timrwood/moment/2.1.0/min/moment.min.js")
   title Status
-  style
+  style.
     table {
       width: 100%;
     }
@@ -35,7 +35,7 @@ head
       display:inline;
       float:right;
     }
-  script
+  script.
     var repos = !{JSON.stringify(repos)};
     $(document).ready(function(){
       $(".loading").text("0/"+ repos.length);
