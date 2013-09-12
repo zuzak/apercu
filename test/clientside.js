@@ -6,7 +6,7 @@ var url = "http://" + config.get("ip") + ":" + config.get('port');
 
 describe('The project list', function(){
     before(function(done){
-        this.browser = new Browser();
+        this.browser = new Browser({silent:true});
         this.browser.visit(url).then(done,done);
     });
     it("should display the correct repositories", function(done){
