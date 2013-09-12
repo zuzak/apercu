@@ -8,7 +8,14 @@ node_js:
 - '0.6'
 notifications:
   irc:
-  - irc.freenode.net#oaosidl
+      channels:
+          - irc.freenode.net#oaosidl
+      template:
+          - "%{commit}@%{repository}: %{message}"
+      on_success: change
+      on_failutr: always
+      use_notice: true
+      skip_join: true
 env:
   matrix:
   - NODE_ENV=test
