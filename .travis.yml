@@ -1,13 +1,16 @@
 language: node_js
 before_script:
-    - "npm start&"
+- npm start&
 node_js:
-    - "0.11"
-    - "0.10"
-    - "0.8"
-    - "0.6"
+- '0.11'
+- '0.10'
+- '0.8'
+- '0.6'
 notifications:
-    irc:
-        - "irc.freenode.net#oaosidl"
+  irc:
+  - irc.freenode.net#oaosidl
 env:
-    - "NODE_ENV=test"
+  matrix:
+  - NODE_ENV=test
+  global:
+    secure: IiyOVQ896C6wThU12pXsKzGS9wyP2m+XoO7qL+oaHrlQlAalxGWdkEsrVEIEhDyCTAAly668+LkruVFOhFSfmYBSLE1+4g06A7RsGU9AoEDfmGFOEsb+5k75ZNe97uz9/C+p1xH7qjXLoK378+suKXusxGiq13wzrbFcPwcrq40=

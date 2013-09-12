@@ -10,6 +10,7 @@ app.set("view engine","jade");
 app.use(express.logger("dev"));
 app.use(express.static(__dirname + "/public"));
 
+console.log(config.get("githubsecret"));
 
 app.get("/", function(req, res){
     var defaultRepos = config.get("repos");
