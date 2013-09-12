@@ -20,6 +20,12 @@ describe('The project list', function(){
         this.browser.html(".apercu-dummy-nobuild").should.be.ok;
         done();
     });
+    it("should display the essential elements", function(done){
+        this.browser.html("table").should.be.ok;
+        this.browser.html("input").should.be.ok;
+        this.browser.html("button").should.be.ok;
+        done();
+    });
     it("should display the correct Travis states", function(done){
         this.browser.html(".apercu-dummy-passing .label-success").should.be.ok;
         this.browser.html(".apercu-dummy-failing .label-danger").should.be.ok;
