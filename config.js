@@ -44,6 +44,7 @@ var conf = convict({
 
 try {
     conf.loadFile("./config.json");
+    console.log("Loaded config.json");
 } catch(e){
     console.log("No config.json");
 }
@@ -51,6 +52,7 @@ if(conf.get("environ") == "test"){
     try {
         console.log("*** TESTING ***");
         conf.loadFile("./test/config.json");
+        console.log("Loaded test-specific config.json");
     } catch(e) {
         console.log("No test-specific config.json");
     }

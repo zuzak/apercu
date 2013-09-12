@@ -7,7 +7,9 @@ var url = "http://" + config.get("ip") + ":" + config.get('port');
 describe('The project list', function(){
     before(function(done){
         this.browser = new Browser({silent:true});
-        this.browser.visit(url).then(done,done);
+        this.browser.visit(url, function(){
+            done();
+        });
     });
     it("should be connected to successfully", function(done){
         this.browser.success.should.be.ok;
