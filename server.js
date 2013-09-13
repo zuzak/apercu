@@ -21,7 +21,8 @@ app.get("/api/:user/:repo.json", function(req, res){
     var repo = req.params.repo;
     async.parallel([
         function(callback){
-           fetchAPI("https://api.travis-ci.org/repos/" + user + "/" + repo + "/builds.json", function(travis){
+           fetchAPI("https://api.travis-ci.org/repos/" + user + "/" + repo + "/builds.json", function(error,travis){
+               if(error){callback(error,null);return}
                var result = {tests:{travis:{}}};
                if(travis.length === 0){
                    result.tests.travis.result = null;
@@ -55,7 +56,8 @@ app.get("/api/:user/:repo.json", function(req, res){
                 append = "?client_id=" + config.get("githubid");
                 append += "&client_secret=" + config.get("githubsecret");
             }
-            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + "/commits" + append, function(github){
+            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + "/commits" + append, function(err,github){
+                if(err){callback(err,null);return}
                 if(!github){callback();return;}
                 github = github[0];
                 var result = {
@@ -74,7 +76,8 @@ app.get("/api/:user/:repo.json", function(req, res){
                 append = "?client_id=" + config.get("githubid");
                 append += "&client_secret=" + config.get("githubsecret");
             }
-            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + append, function(github){
+            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + append, function(err,github){
+                if(err){callback(err,null);return}
                 if(!github){callback();return;}
                 var result = {
                     repo: {
@@ -116,7 +119,8 @@ app.get("/api/:user/:repo.json", function(req, res){
         },*/
         function(callback){
 //            fetchAPI("http://registry.npmjs.org/" + repo + "/latest", function(npm){
-            fetchAPI("https://raw.github.com/"+user+"/"+repo+"/master/package.json", function(npm){
+            fetchAPI("https://raw.github.com/"+user+"/"+repo+"/master/package.json", function(err,npm){
+                if(err){callback(err,null);return;}
                 if(!npm){callback();return;}
                 var result = {
                     npm: {
@@ -144,11 +148,12 @@ app.get("/api/:user/:repo.json", function(req, res){
 function fetchAPI(url, callback){
     var res;
     request.get(url, function(e, r, b){
+        if(e){callback(e);return}
         if(r.statusCode == 200){
             var result = JSON.parse(b);
-            callback(result);
+            callback(null,result);
         } else {
-            callback();
+            callback(r.statusCode);
         }
     });
 }

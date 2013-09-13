@@ -1,12 +1,13 @@
 var config = require('../config');
 var should = require('should');
 var Browser = require('zombie');
+var async = require('async');
 
 var url = "http://" + config.get("ip") + ":" + config.get('port');
 
 describe('The project list', function(){
     before(function(done){
-        this.browser = new Browser();//{silent:true});
+        this.browser = new Browser({silent:true});
         this.browser.visit(url, function(){
             done();
         });
@@ -16,10 +17,15 @@ describe('The project list', function(){
         done();
     });
     it("should display the correct repositories", function(done){
-        this.browser.html(".apercu-dummy-passing").should.be.ok;
-        this.browser.html(".apercu-dummy-failing").should.be.ok;
-        this.browser.html(".apercu-dummy-erroring").should.be.ok;
-        this.browser.html(".apercu-dummy-nobuild").should.be.ok;
+        var browser = this.browser;
+        browser.wait(function(foo){
+            var repos = config.get("repos");
+            async.each(repos,function(repo){
+                var repoClass = "." + repo.replace("/","-");
+            }, done);
+            // this test is here to convince me the test actually works
+            browser.html(".xxxxxx").should.not.be.ok;
+        });
         done();
     });
     it("should display the essential elements", function(done){
@@ -29,18 +35,31 @@ describe('The project list', function(){
         done();
     });
     it("should display the correct Travis states", function(done){
-        this.browser.html(".apercu-dummy-passing .label-success").should.be.ok;
-        this.browser.html(".apercu-dummy-failing .label-danger").should.be.ok;
-        this.browser.html(".apercu-dummy-erroring .label-default").should.be.ok;
-        this.browser.html(".apercu-dummy-erroring .label-default").should.be.ok;
-        this.browser.html(".apercu-dummy-nobuild .label").should.not.be.ok;
+        var testRepos = ["apercu-dummy/passing",
+                         "apercu-dummy/failing",
+                         "apercu-dummy/erroring",
+                         "apercu-dummy/nobuild"];
+        var browser = this.browser;
+        var foo = false;
+
+        async.each(testRepos,function(repo){
+            browser.fill("input",repo, function(){
+                browser.pressButton("button");
+            });
+        }, function(){
+            foo = true;
+            browser.html(".apercu-dummy-passing .label-success").should.be.ok("Successful build icon did not show");
+            browser.html(".apercu-dummy-failing .label-danger").should.be.ok("Bad build icon did not show");
+            browser.html(".apercu-dummy-erroring .label-default").should.be.ok("Error build icon did not show");
+            browser.html(".apercu-dummy-nobuild .label").should.not.be.ok("Build with no Travis showed a label");
+        });
         done();
     });
     it("should append a repository when the form is submitted",function(done){
         var browser = this.browser;
-        browser.fill("input","github/gitignore", function(){
+        browser.fill("input","torvalds/git", function(){
             browser.pressButton("button", function(){
-                browser.html(".github-gitignore").should.be.ok;
+                browser.html(".torvalds-git").should.be.ok;
                 done();
             });
         });
