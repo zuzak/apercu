@@ -99,6 +99,7 @@ app.get("/api/:user/:repo.json", function(req, res){
         },
         function(callback){
             request.get("https://raw.github.com/"+user+"/"+repo+"/master/VERSION", function(e, r, b){
+                if(e){callback(e);return;}
                 var result = {};
                 if(b!=="" && r.statusCode == "200"){
                     result.version = b.split("\n",1);
