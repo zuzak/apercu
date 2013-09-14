@@ -7,12 +7,13 @@ build:
             node -v
             npm -v
     - script:
-        name: install application
+        name: install dependencies
         code: "npm install"
     - script:
-        name: run webserver
+        name: run application in background
         code: "npm start &"
     - script:
         name: run tests
         code: |
+            echo "foo"
             npm test
