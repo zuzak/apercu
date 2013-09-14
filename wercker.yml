@@ -1,7 +1,5 @@
-box: wercker/nodejs@0.0.10
-# Build definition
+box: wercker/ubuntu12.04-nodejs0.10@0.0.4
 build:
-  # The steps that will be executed on build
   steps:
     - script:
         name: echo nodejs information
