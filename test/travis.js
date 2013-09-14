@@ -23,7 +23,7 @@ describe('The Travis CI section of the API', function(){
             data.tests.travis.should.have.property("pending");
             data.tests.travis.pending.should.be.a('boolean');
             data.tests.travis.result.should.equal(-1);
- 
+
             done();
         });
     });

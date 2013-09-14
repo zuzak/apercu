@@ -4,6 +4,7 @@ var Browser = require('zombie');
 var async = require('async');
 
 var url = "http://" + config.get("ip") + ":" + config.get('port');
+console.log("Using " + url + " for client-side tests");
 
 describe('The project list', function(){
     before(function(done){
