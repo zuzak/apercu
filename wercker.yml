@@ -5,6 +5,7 @@ build:
   steps:
     # A step that executes `npm install` command
     - npm-install
+    - npm-start &
     # A step that executes `npm test` command
     - npm-test
 
