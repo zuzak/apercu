@@ -13,3 +13,20 @@ build:
             npm start &
             echo "Server started"
             npm test
+    - script:
+        name: clone jscoverage
+        code: |
+            git clone git://github.com/visionmedia/node-jscoverage
+    - script:
+        name: install jscoverage
+        code: |
+            cd jscoverage
+            ./configure
+            make
+            make install
+    - script:
+        name: calculate test efficacy
+        code: |
+            export APERCU_COVERAGE=1
+            ./node_modules/bin/mocha test -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
+
