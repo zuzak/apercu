@@ -3,17 +3,13 @@ box: wercker/nodejs
 build:
   # The steps that will be executed on build
   steps:
-    # A step that executes `npm install` command
-    - npm-install
     - script:
         name: install application
         code: "npm install"
     - script:
         name: run webserver
         code: "npm start &"
-    - script:
-        name: test application
-        code: "npm test"
+    - npm-test
     - script:
         name: echo nodejs information
         code: |
