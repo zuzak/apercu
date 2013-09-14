@@ -79,7 +79,7 @@ app.get("/api/:user/:repo.json", function(req, res){
             }
             fetchAPI("https://api.github.com/repos/" + user + "/" + repo + append, function(err,status,github){
                 if(err){callback(err,null);return}
-                if(status != "200"){console.log(github.message);return;}
+                if(status != "200"){return;}
                 if(!github){callback();return;}
                 var result = {
                     repo: {
@@ -138,7 +138,7 @@ app.get("/api/:user/:repo.json", function(req, res){
             });
         }],
         function(err, results){
-            if(err){res.status(500);console.log(err);}
+            if(err){res.status(500);}
             var data = {};
             results.forEach(function(result){
                 _.extend(data,result);
@@ -156,7 +156,6 @@ function fetchAPI(url, callback){
         try{
         var result = JSON.parse(b);
         }catch(err){
-            console.log(url);
             if(r.statusCode == "404"){
                 callback(null,r.statusCode);
             } else {
