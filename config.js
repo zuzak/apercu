@@ -27,7 +27,7 @@ var conf = convict({
         doc: "The default repositories to feature in the project list",
         default:[
                     "visionmedia/jade",
-                    "apernwarr/sshuttle",
+                    "apenwarr/sshuttle",
                     "gitlabhq/gitlabhq",
                     "zuzak/apercu"
                 ],

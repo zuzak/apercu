@@ -4,20 +4,17 @@ before_script:
 node_js:
 - '0.11'
 - '0.10'
-- '0.8'
-- '0.6'
 notifications:
+  email: false
   irc:
       channels:
           - irc.freenode.net#oaosidl
       template:
           - "%{commit}@%{repository}: %{message}"
-      on_success: change
-      on_failutr: always
+      on_success: always 
+      on_failure: change
       use_notice: true
       skip_join: true
 env:
-  matrix:
-  - NODE_ENV=test
   global:
     secure: FSkNQlb7+Vn/FLaevHjd1CuCqweJYXkws95RT88g6qmru3k/5tc8aV8JPgaWapLk0Erk1AtFDd0II6R0M9yGz8JcQ1NJy46inuJdmb469MzGraK2VT95SETBNNLqWUc/ugDJpTrCnJ0sHAlmdhk9wHxjk46rRg0gniwoiruQipk=

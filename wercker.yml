@@ -9,7 +9,9 @@ build:
     - script:
         name: run webserver
         code: "npm start &"
-    - npm-test
+    - script:
+        name: run tests
+        code: "npm test"
     - script:
         name: echo nodejs information
         code: |
