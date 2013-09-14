@@ -1,8 +1,13 @@
-box: wercker/nodejs
+box: wercker/nodejs@0.0.10
 # Build definition
 build:
   # The steps that will be executed on build
   steps:
+    - script:
+        name: echo nodejs information
+        code: |
+            node -v
+            npm -v
     - script:
         name: install application
         code: "npm install"
@@ -12,8 +17,3 @@ build:
     - script:
         name: run tests
         code: "npm test"
-    - script:
-        name: echo nodejs information
-        code: |
-          echo "node version $(node -v) running"
-          echo "npm version $(npm -v) running"
