@@ -9,8 +9,8 @@ build:
     - script:
         name: start and run tests
         code: |
-              "npm start &"
-              "npm test"
+              npm start &
+              npm test
     - script:
         name: echo nodejs information
         code: |
