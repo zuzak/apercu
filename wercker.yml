@@ -20,7 +20,7 @@ build:
     - script:
         name: install jscoverage
         code: |
-            cd jscoverage
+            cd node-jscoverage
             ./configure
             make
             make install
