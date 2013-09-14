@@ -10,12 +10,7 @@ build:
         name: install dependencies
         code: "npm install"
     - script:
-        name: run application in background
+        name: run application and test
         code: |
             npm start &
             echo "Server started"
-    - script:
-        name: run tests
-        code: |
-            echo "foo"
-            npm test
