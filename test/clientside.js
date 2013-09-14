@@ -22,7 +22,9 @@ describe('The project list', function(){
             var repos = config.get("repos");
             async.each(repos,function(repo){
                 var repoClass = "." + repo.replace("/","-");
+                console.log(repoClass);
                 browser.html(repoClass).should.be.ok;
+                console.log(repoClass);
             }, done);
             // this test is here to convince me the test actually works
             browser.html(".xxxxxx").should.not.be.ok;
@@ -60,7 +62,8 @@ describe('The project list', function(){
     });
     it("should append a repository when the form is submitted",function(done){
         var browser = this.browser;
-        browser.fill("input","torvalds/git").pressButton("button", function(){
+        browser.fill("input","torvalds/git");
+        browser.pressButton("button", function(){
             browser.wait(function(){
                 browser.html(".torvalds-git").should.be.ok;
                 done();
