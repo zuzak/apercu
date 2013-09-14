@@ -13,7 +13,7 @@ build:
         name: run application in background
         code: |
             npm start &
-            echo "Server started!"
+            echo "Server started"
     - script:
         name: run tests
         code: |
