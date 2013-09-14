@@ -21,7 +21,7 @@ app.get("/api/:user/:repo.json", function(req, res){
     var repo = req.params.repo;
     async.parallel([
         function(callback){
-           fetchAPI("https://api.travis-ci.org/repos/" + user + "/" + repo + "/builds.json", function(error,travis){
+           fetchAPI("https://api.travis-ci.org/repos/" + user + "/" + repo + "/builds.json", function(error,status,travis){
                if(error){callback(error,null);return}
                var result = {tests:{travis:{}}};
                if(travis.length === 0){
@@ -56,8 +56,9 @@ app.get("/api/:user/:repo.json", function(req, res){
                 append = "?client_id=" + config.get("githubid");
                 append += "&client_secret=" + config.get("githubsecret");
             }
-            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + "/commits" + append, function(err,github){
+            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + "/commits" + append, function(err,status,github){
                 if(err){callback(err,null);return}
+                if(status !== 200){callback(status);return;}
                 if(!github){callback();return;}
                 github = github[0];
                 var result = {
@@ -76,8 +77,9 @@ app.get("/api/:user/:repo.json", function(req, res){
                 append = "?client_id=" + config.get("githubid");
                 append += "&client_secret=" + config.get("githubsecret");
             }
-            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + append, function(err,github){
+            fetchAPI("https://api.github.com/repos/" + user + "/" + repo + append, function(err,status,github){
                 if(err){callback(err,null);return}
+                if(status != "200"){return;}
                 if(!github){callback();return;}
                 var result = {
                     repo: {
@@ -120,7 +122,7 @@ app.get("/api/:user/:repo.json", function(req, res){
         },*/
         function(callback){
 //            fetchAPI("http://registry.npmjs.org/" + repo + "/latest", function(npm){
-            fetchAPI("https://raw.github.com/"+user+"/"+repo+"/master/package.json", function(err,npm){
+            fetchAPI("https://raw.github.com/"+user+"/"+repo+"/master/package.json", function(err,status,npm){
                 if(err){callback(err,null);return;}
                 if(!npm){callback();return;}
                 var result = {
@@ -136,6 +138,7 @@ app.get("/api/:user/:repo.json", function(req, res){
             });
         }],
         function(err, results){
+            if(err){res.status(500);}
             var data = {};
             results.forEach(function(result){
                 _.extend(data,result);
@@ -147,15 +150,20 @@ app.get("/api/:user/:repo.json", function(req, res){
 });
 
 function fetchAPI(url, callback){
-    var res;
+    var result;
     request.get(url, function(e, r, b){
         if(e){callback(e);return}
-        if(r.statusCode == 200){
-            var result = JSON.parse(b);
-            callback(null,result);
-        } else {
-            callback(r.statusCode);
+        try{
+        var result = JSON.parse(b);
+        }catch(err){
+            if(r.statusCode == "404"){
+                callback(null,r.statusCode);
+            } else {
+                callback(err,r.statusCode,result);
+            }
+            return;
         }
+        callback(null,r.statusCode,result);
     });
 }
 

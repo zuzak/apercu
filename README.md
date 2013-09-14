@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.org/zuzak/apercu.png?branch=master)](https://travis-ci.org/zuzak/apercu)
 [![Dependency Status](https://gemnasium.com/zuzak/apercu.png)](https://gemnasium.com/zuzak/apercu)
+[![Coverage Status](https://coveralls.io/repos/zuzak/apercu/badge.png)](https://coveralls.io/r/zuzak/apercu)
+
+[![wercker status](https://app.wercker.com/status/18414a32b3b8eddcd3066fdc94c761a9 "wercker status")](https://app.wercker.com/project/bykey/18414a32b3b8eddcd3066fdc94c761a9)
 
 ## Installation
 * ``npm install``

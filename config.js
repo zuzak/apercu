@@ -27,7 +27,7 @@ var conf = convict({
         doc: "The default repositories to feature in the project list",
         default:[
                     "visionmedia/jade",
-                    "apernwarr/sshuttle",
+                    "apenwarr/sshuttle",
                     "gitlabhq/gitlabhq",
                     "zuzak/apercu"
                 ],
@@ -46,7 +46,7 @@ try {
     conf.loadFile("./config.json");
     console.log("Loaded config.json");
 } catch(e){
-    console.log("No config.json");
+//    console.log("No config.json");
 }
 if(conf.get("environ") == "test"){
     try {
