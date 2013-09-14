@@ -6,7 +6,11 @@ build:
         code: |
             node -v
             npm -v
-    - npm-install
+    - script:
+        name: install dependencies
+        code: |
+            npm install
+            sudo npm install -g istanbul
     - script:
         name: run application and test
         code: |
@@ -14,13 +18,9 @@ build:
             echo "Server started"
             npm test
     - script:
-        name: install istanbul
-        code: |
-            sudo npm install -g istanbul
-    - script:
         name: calculate test efficacy
         code: |
-            istanbul cover ./node_modules/mocha/.bin/_mocha --report lcovonly -- -R spec
+            istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec
     - script:
         name: report coverage to coveralls
         code: |
