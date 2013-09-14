@@ -5,7 +5,7 @@ build:
   steps:
     # A step that executes `npm install` command
     - npm-install
-    - npm-start &
+    - start app
     # A step that executes `npm test` command
     - npm-test
 
@@ -16,3 +16,6 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+    - script:
+        name: start app
+        code: "npm start &"
