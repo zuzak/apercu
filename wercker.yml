@@ -14,6 +14,10 @@ build:
             echo "Server started"
             npm test
     - script:
+        name: install istanbul
+        code: |
+            sudo npm install -g istanbul
+    - script:
         name: calculate test efficacy
         code: |
             istanbul cover ./node_modules/mocha/.bin/_mocha --report lcovonly -- -R spec
