@@ -24,8 +24,6 @@ head
       color:#ccc;
     }
     input {
-      margin:2em auto;
-      width:20% !important;
       display:block;
       border:1px
     }
@@ -34,6 +32,10 @@ head
       height:2em;
       display:inline;
       float:right;
+    }
+    .form {
+      width:20%;
+      margin:auto;
     }
   script.
     var repos = !{JSON.stringify(repos)};
@@ -143,5 +145,5 @@ body
     tbody
   div.loading
   div.form
-    input(type="text",placeholder="torvalds/git").form-control
-    button(type="submit").form-control
+    input(type="text",placeholder="torvalds/linux").form-control
+    button(type="submit").form-control Add new repo
