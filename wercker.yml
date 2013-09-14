@@ -23,7 +23,7 @@ build:
             cd node-jscoverage
             ./configure
             make
-            make install
+            sudo make install
     - script:
         name: calculate test efficacy
         code: |
