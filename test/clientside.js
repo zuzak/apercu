@@ -22,9 +22,7 @@ describe('The project list', function(){
             var repos = config.get("repos");
             async.each(repos,function(repo){
                 var repoClass = "." + repo.replace("/","-");
-                console.log(repoClass);
                 browser.html(repoClass).should.be.ok;
-                console.log(repoClass);
             }, done);
             // this test is here to convince me the test actually works
             browser.html(".xxxxxx").should.not.be.ok;
@@ -65,6 +63,7 @@ describe('The project list', function(){
         browser.fill("input","torvalds/git");
         browser.pressButton("button", function(){
             browser.wait(function(){
+                console.log(browser.html("tbody"));
                 browser.html(".torvalds-git").should.be.ok;
                 done();
             });
