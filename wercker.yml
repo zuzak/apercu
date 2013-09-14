@@ -11,7 +11,9 @@ build:
         code: "npm install"
     - script:
         name: run application in background
-        code: "npm start &"
+        code: |
+            npm start &
+            echo "Server started!"
     - script:
         name: run tests
         code: |
