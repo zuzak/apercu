@@ -6,10 +6,10 @@ build:
         code: |
             node -v
             npm -v
+    - npm-install
     - script:
-        name: install dependencies
+        name: install further dependencies
         code: |
-            npm install
             sudo npm install -g istanbul
     - script:
         name: run application and test
