@@ -6,9 +6,7 @@ build:
         code: |
             node -v
             npm -v
-    - script:
-        name: install dependencies
-        code: "npm install"
+    - npm-install
     - script:
         name: run application and test
         code: |
