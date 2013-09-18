@@ -46,7 +46,7 @@ try {
     conf.loadFile("./config.json");
     console.log("Loaded config.json");
 } catch(e){
-    console.log("No config.json");
+//    console.log("No config.json");
 }
 if(conf.get("environ") == "test"){
     try {

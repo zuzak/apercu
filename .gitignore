@@ -16,3 +16,5 @@ node_modules
 
 config.json
 !test/config.json
+
+coverage

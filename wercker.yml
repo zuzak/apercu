@@ -1,18 +1,28 @@
-box: wercker/nodejs@0.0.10
 # Build definition
+box: wercker/ubuntu12.04-nodejs0.10@0.0.4
 build:
-  # The steps that will be executed on build
   steps:
     - script:
-        name: install application
-        code: "npm install"
+        name: echo nodejs information
+        code: |
+            node -v
+            npm -v
+    - npm-install
     - script:
         name: start and run tests
         code: |
               npm start &
               npm test
-    - script:
-        name: echo nodejs information
+        name: install further dependencies
         code: |
-          echo "node version $(node -v) running"
-          echo "npm version $(npm -v) running"
+            sudo npm install -g istanbul
+    - script:
+        name: calculate test efficacy
+        code: |
+            istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec
+    - script:
+        name: report coverage to coveralls
+        code: |
+            cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+            rm -rf ./coverage
+

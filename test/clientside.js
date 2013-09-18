@@ -45,14 +45,12 @@ describe('The project list', function(){
             browser.fill("input",repo).pressButton("button");
         });
        browser.wait(function(){
-            console.log(browser.html("tbody"));
             browser.html(".apercu-dummy-passing .label-success").should.be.ok;
             browser.html(".apercu-dummy-failing .label-danger").should.be.ok;
             browser.html(".apercu-dummy-erroring .label-default").should.be.ok;
             browser.html(".apercu-dummy-nobuild .label").should.not.be.ok;
             done();
        });
-        //});
     });
     it("should append a repository when the form is submitted",function(done){
         var browser = this.browser;

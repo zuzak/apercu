@@ -1,29 +1,33 @@
 {
-    "name": "apercu",
-    "version": "0.0.1",
-    "private": "true",
-    "dependencies": {
-        "express": "3.x.x",
-        "jade": "0.35.0",
-        "request": "2.27.x",
-        "async": "0.2.9",
-        "underscore": "1.5.x",
-        "convict":"0.4.0"
-    },
-    "devDependencies": {
-        "mocha": "1.12.1",
-        "should": "1.2.2",
-        "zombie": "1.4.x"
-    },
-    "author": {
-        "name": "Douglas Gardner",
-        "email": "douglas@chippy.ch",
-        "url": "http://chippy.ch"
-    },
-    "scripts": {
-        "test": "node_modules/.bin/mocha"
-    },
-    "engines":{
-        "node": "0.10.0"
-    }
+  "name": "apercu",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "express": "3.x.x",
+    "jade": "0.35.0",
+    "request": "2.27.x",
+    "async": "0.2.9",
+    "underscore": "1.5.x",
+    "convict": "0.4.0",
+    "coveralls": "~2.3.0",
+    "mocha-lcov-reporter": "0.0.1",
+    "istanbul": "~0.1.43"
+  },
+  "devDependencies": {
+    "mocha": "1.12.1",
+    "should": "1.2.2",
+    "zombie": "1.4.x"
+  },
+  "author": {
+    "name": "Douglas Gardner",
+    "email": "douglas@chippy.ch",
+    "url": "http://chippy.ch"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha",
+    "coverage": "YOURPACKAGE_COVERAGE=1 ./node_modules/.bin/mocha test -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "engines": {
+    "node": "0.10.0"
+  }
 }

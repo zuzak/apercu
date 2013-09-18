@@ -156,7 +156,6 @@ function fetchAPI(url, callback){
         try{
         var result = JSON.parse(b);
         }catch(err){
-            console.log(url);
             if(r.statusCode == "404"){
                 callback(null,r.statusCode);
             } else {
